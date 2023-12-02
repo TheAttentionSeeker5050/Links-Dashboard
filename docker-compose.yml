@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  
+  db:
+    build:
+      context: ./MySql
+      dockerfile: MySql.Dockerfile
+    image: mysql-server
+    container_name: my-mysql-server
+    command: --authentication-policy=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - data-volume:/var/lib/mysql
+    env_file:
+      - .env.local
+    networks:
+      - app-network
+
+  adminer:
+    image: adminer
+    container_name: my-adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    data-volume:
+    web-root:
+      driver: local

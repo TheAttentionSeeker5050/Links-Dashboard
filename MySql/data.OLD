@@ -1,0 +1,38 @@
+-- Creating tblUsers
+CREATE TABLE tblUsers (
+    userId INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    hashPassword VARCHAR(255),
+    hashPasswordSalt VARCHAR(255)
+);
+
+-- Creating tblCategories
+CREATE TABLE tblCategories (
+    categoryId INT AUTO_INCREMENT PRIMARY KEY,
+    categoryName VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Creating tblLinks
+CREATE TABLE tblLinks (
+    linkId INT AUTO_INCREMENT PRIMARY KEY,
+    faviconPath VARCHAR(255) NOT NULL,
+    path VARCHAR(255) NOT NULL,
+    linkPath VARCHAR(255) NOT NULL,
+    categoryId INT,
+    FOREIGN KEY (categoryId) REFERENCES tblCategories(categoryId)
+);
+
+-- Inserting entries into tblUsers
+INSERT INTO tblUsers (username) VALUES ('user1'), ('user2');
+
+-- Inserting categories into tblCategories
+INSERT INTO tblCategories (categoryName) VALUES ('Technology'), ('School'), ('Play'), ('Data');
+
+-- Inserting links into tblLinks
+-- Note: The category IDs will be auto-generated. 
+-- You'll need to check these IDs before inserting these links or use a subquery to fetch the correct ID.
+INSERT INTO tblLinks (faviconPath, linkPath, categoryId) VALUES 
+('https://google.com/favicon.ico', 'https://google.com', (SELECT categoryId FROM tblCategories WHERE categoryName = 'Technology')),
+('https://google.com/favicon.ico', 'https://google.com', (SELECT categoryId FROM tblCategories WHERE categoryName = 'School')),
+('https://google.com/favicon.ico', 'https://google.com', (SELECT categoryId FROM tblCategories WHERE categoryName = 'Play')),
+('https://google.com/favicon.ico', 'https://google.com', (SELECT categoryId FROM tblCategories WHERE categoryName = 'Data'));
