@@ -1,8 +1,40 @@
-﻿@{
+﻿@model WebAppProject3.Models.LinkModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">_LaunchPad</h1>
+    @* if the user is on mobile screen, display subsections of linlSection flex col, if not mobile, display flex row *@
+    <section id="linksSection" class="d-flex flex-sm-row flex-column gap-3 mx-auto">
+        @* for each of the categories in enum, div with title as enum Category *@
+
+        @foreach (var category in Enum.GetValues(typeof(Category)))
+        {
+            <div class="linkCategory">
+                <h2>@category</h2>
+                @* for each of the links in the model, if the link category matches the current category, display the link *@
+                @foreach (var link in ViewBag.Links)
+                {
+                    
+
+                    @if (link.LinkCategory.ToString() == category.ToString())
+                    {
+                        <div class="">
+                            <img src="@link.FaviconSrc" width="25" height="25" />
+                            <a href="@link.LinkHref">@link.LinkName</a>
+                        </div>
+                    }
+
+                }
+                
+            </div>
+        }
+        @* <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div> *@
+    </section>
+    
 </div>

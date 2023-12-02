@@ -8,7 +8,7 @@
     <h1 class="display-4">Register Page</h1>
     
     @* make register form submit, with username, password and password confirmation *@
-    <form asp-controller="User" asp-action="LoginSubmit" method="POST">
+    <form asp-controller="User" asp-action="LoginSubmit" method="POST" class="d-flex flex-column gap-4">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="Username" name="Username" placeholder="Enter username" asp-for="Username">

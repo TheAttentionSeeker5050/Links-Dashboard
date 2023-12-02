@@ -3,6 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using WebAppProject3.Data;
 using WebAppProject3.Models;
 
+// authorization imports
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
+
+
 namespace WebAppProject3.Controllers
 {
     public class UserController : Controller
@@ -25,6 +35,10 @@ namespace WebAppProject3.Controllers
             // initialize new user model, we will need it in order to build the form
             // in the view
             UserModel user = new UserModel();
+
+            // enable User.Identity.IsAuthenticated
+            ViewBag.IsAuthenticated = User.Identity.IsAuthenticated;
+
             return View(user);
         }
 
@@ -98,8 +112,10 @@ namespace WebAppProject3.Controllers
 
         // login post controller
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         [Route("/login")]
-        public IActionResult LoginSubmit(UserModel user)
+        public async Task<IActionResult> LoginSubmitAsync(UserModel user)
         {
             // check if model is valid
             if (ModelState.IsValid)
@@ -114,8 +130,20 @@ namespace WebAppProject3.Controllers
                     if (dbUser.ComparePasswordFromDB(user.Password))
                     {
                         // if password matches, add user to session
-                        HttpContext.Session.SetString("Username", user.Username);
+
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, user.Username),
+                            // Add other claims as needed
+                        };
+
+                        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                                        var principal = new ClaimsPrincipal(identity);
+
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
                         // redirect to home page
+
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -140,13 +168,14 @@ namespace WebAppProject3.Controllers
         }
 
         // logout controller
-        [HttpGet]
+        [HttpPost]
         [Route("/logout")]
-        public IActionResult Logout()
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
         {
-            // remove user from session
-            HttpContext.Session.Remove("Username");
-            // redirect to home page
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Redirect to the home page or another page after logout
             return RedirectToAction("Index", "Home");
         }
 
