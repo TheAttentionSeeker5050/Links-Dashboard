@@ -17,6 +17,7 @@ namespace WebAppProject3.Data
         // public DbSet<YourEntity> YourEntities { get; set; }
         public DbSet<UserModel> Users { get; set; }
         public DbSet<LinkModel> Links { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
         
     }
 

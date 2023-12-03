@@ -43,6 +43,10 @@ namespace WebAppProject3.Controllers
             // using Entity Framework, get all links from database
             var links = _context.Links.ToArray();
 
+            // add all the categories to ViewBag
+            ViewBag.Categories = _context.Categories.ToArray();
+            
+
             ViewBag.Links = links;
 
             return View();

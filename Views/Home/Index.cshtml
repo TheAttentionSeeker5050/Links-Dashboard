@@ -10,11 +10,11 @@
     <section id="linksDashboardSection" class="d-flex flex-sm-row flex-column justify-content-around gap-5 mx-auto">
         @* for each of the categories in enum, div with title as enum Category *@
 
-        @foreach (var category in Enum.GetValues(typeof(Category)))
+        @foreach (var category in @ViewBag.Categories)
         {
             <div class="linkCategory">
                 <div class="d-flex flex-row gap-2 my-1">
-                    <h2 class="h4"> @category </h2>
+                    <h2 class="h4"> @category.CategoryName </h2>
 
                     @* if is authenticated, display the add and edit buttons *@
                     @if (User.Identity.IsAuthenticated)
@@ -37,8 +37,8 @@
                 @* for each of the links in the model, if the link category matches the current category, display the link *@
                 @foreach (var link in ViewBag.Links)
                 {
-                    
-                    @if (link.LinkCategory.ToString() == category.ToString() && link.IsPinned == true)
+
+                    @if (link.LinkCategory.ToString() == category.CategoryName.ToString() && link.IsPinned == true)
                     {
                         <div class="d-flex flex-row gap-1 my-2 justify-content-between">
                             <div>

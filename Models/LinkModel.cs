@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WebAppProject3.Models
 {
 
-    public enum Category
+    /*public enum Category
     {
         Technology, School, Play, Data
-    }
+    }*/
 
     public class LinkModel
     {
@@ -20,7 +20,17 @@ namespace WebAppProject3.Models
         public string LinkHref{ get; set; } = "";
         public string LinkName { get; set; } = "";
         public bool IsPinned { get; set; } = false;
-        public Category? LinkCategory { get; set; } = null;
+        public CategoryModel LinkCategory { get; set; } = new CategoryModel();
+    }
+
+    // category model
+    public class CategoryModel
+    {
+        // fields: categoryId, categoryName
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int CategoryId { get; set; } = 0;
+        public string CategoryName { get; set; } = "";
     }
 
 }

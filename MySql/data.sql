@@ -1,4 +1,4 @@
--- Adminer 4.8.1 MySQL 8.2.0 dump
+
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -7,6 +7,31 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
+DROP TABLE IF EXISTS `Categories`;
+CREATE TABLE `Categories` (
+  `CategoryId` int NOT NULL AUTO_INCREMENT,
+  `CategoryName` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`CategoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+DROP TABLE IF EXISTS `Links`;
+CREATE TABLE `Links` (
+  `LinkId` int NOT NULL AUTO_INCREMENT,
+  `FaviconSrc` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `LinkLabel` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `LinkName` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `LinkHref` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `IsPinned` tinyint(1) NOT NULL DEFAULT '0',
+  `LinkCategoryCategoryId` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`LinkId`),
+  KEY `IX_Links_LinkCategoryCategoryId` (`LinkCategoryCategoryId`),
+  CONSTRAINT `FK_Links_Categories_LinkCategoryCategoryId` FOREIGN KEY (`LinkCategoryCategoryId`) REFERENCES `Categories` (`CategoryId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `Links` (`LinkId`, `FaviconSrc`, `LinkLabel`, `LinkName`, `LinkHref`, `IsPinned`, `LinkCategoryCategoryId`) VALUES
+(1,	'https://google.com/favicon.ico',	'Finders',	'Google',	'https://google.com',	1,	4),
+(2,	'https://chat.openai.com/favicon.ico',	'AI Chatbots',	'ChatGPT',	'https://chat.openai.com/',	0,	4);
 
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (
@@ -19,37 +44,3 @@ CREATE TABLE `Users` (
   PRIMARY KEY (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `Users` (`UserId`, `Username`, `PasswordHash`, `PasswordSalt`, `Password`, `PasswordConfirmation`) VALUES
-(1,	'user1',	'fJHP/11IQtB2Thr+EcRMHc/nVlNCVzkASHiV/cmci/E=',	'66294dc0-dc0d-4231-87ca-8c81dd142d10',	'',	'');
-
-INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`) VALUES
-('20231202191740_InitialCreate',	'6.0.0'),
-('20231202223745_InitialCreate1',	'6.0.0'),
-('20231202223842_Mig1',	'6.0.0');
-
--- 2023-12-02 22:40:15
-
--- Adminer 4.8.1 MySQL 8.2.0 dump
-
-SET NAMES utf8;
-SET time_zone = '+00:00';
-SET foreign_key_checks = 0;
-SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
-
-SET NAMES utf8mb4;
-
-DROP TABLE IF EXISTS `Links`;
-CREATE TABLE `Links` (
-  `LinkId` int NOT NULL AUTO_INCREMENT,
-  `FaviconSrc` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `LinkLabel` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `LinkName` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `LinkCategory` int DEFAULT NULL,
-  `LinkHref` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`LinkId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-INSERT INTO `Links` (`LinkId`, `FaviconSrc`, `LinkLabel`, `LinkName`, `LinkCategory`, `LinkHref`) VALUES
-(1,	'https://google.com/favicon.ico',	'Finders',	'Google',	3,	'https://google.com');
-
--- 2023-12-02 22:54:35
