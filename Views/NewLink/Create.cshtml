@@ -24,22 +24,22 @@
 
         <div class="d-flex flex-row gap-3">
             <label for="FaviconSrc">Favicon Source</label>
-            <input type="text" name="FaviconSrc" id="FaviconSrc" class="form-control" value="@Model.FaviconSrc" />
+            <input type="text" name="FaviconSrc" id="FaviconSrc" class="form-control" value="@Model.FaviconSrc" asp-for="FaviconSrc" />
         </div>
 
         <div class="d-flex flex-row gap-3">
             <label for="LinkLabel">Link Label</label>
-            <input type="text" name="LinkLabel" id="LinkLabel" class="form-control" value="@Model.LinkLabel" />
+            <input type="text" name="LinkLabel" id="LinkLabel" class="form-control" value="@Model.LinkLabel" asp-for="LinkLabel" />
         </div>
 
         <div class="d-flex flex-row gap-3">
             <label for="LinkHref">Link Href</label>
-            <input type="text" name="LinkHref" id="LinkHref" class="form-control" value="@Model.LinkHref" />
+            <input type="text" name="LinkHref" id="LinkHref" class="form-control" value="@Model.LinkHref" asp-for="LinkHref" />
         </div>
 
         <div class="d-flex flex-row gap-3">
             <label for="IsPinned">Is Pinned</label>
-            <input type="checkbox" name="IsPinned" id="IsPinned" class="" value="@Model.IsPinned" />
+            <input type="checkbox" name="IsPinned" id="IsPinned" class="" value="@Model.IsPinned" asp-for="IsPinned" />
         </div>
 
 
