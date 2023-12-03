@@ -18,7 +18,10 @@ namespace WebAppProject3.Data
         public DbSet<UserModel> Users { get; set; }
         public DbSet<LinkModel> Links { get; set; }
         public DbSet<CategoryModel> Categories { get; set; }
+
+        // override OnModelCreating method
         
+
     }
 
     

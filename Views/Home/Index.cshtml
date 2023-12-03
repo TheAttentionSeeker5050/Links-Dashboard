@@ -48,7 +48,7 @@
                             @* if is authenticated, display the add and edit buttons *@
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <a href="https://google.com/">
+                                <a asp-controller="LinkAdmin" asp-action="Edit" asp-route-linkId="@ViewBag.Links[index].LinkId" asp-route-categoryId="@category.CategoryId">
                                     <img src="~/svg/pencil-fill.svg" width="20" height="20" />
                                 </a>
                                 <a href="https://google.com/">
@@ -84,7 +84,7 @@
                             @* if is authenticated, display the add and edit buttons *@
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <a asp-controller="LinkAdmin" asp-action="Edit" asp-route-linkId="@ViewBag.Links[index].LinkId">
+                                <a asp-controller="LinkAdmin" asp-action="Edit" asp-route-linkId="@ViewBag.Links[index].LinkId" asp-route-categoryId="@category.CategoryId">
                                     <img src="~/svg/pencil-fill.svg" width="20" height="20" />
                                 </a>
                                 <a href="https://google.com/">

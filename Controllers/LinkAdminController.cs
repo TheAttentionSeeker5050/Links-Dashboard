@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebAppProject3.Data;
 using Microsoft.AspNetCore.Authorization;
+using WebAppProject3.Models;
 
 
 namespace WebAppProject3.Controllers
@@ -22,16 +23,16 @@ namespace WebAppProject3.Controllers
 
         // edit link get request
         [HttpGet]
-        [Route("/link/{linkId}/edit")]
+        [Route("/category/{categoryId}/link/{linkId}/edit")]
         [Authorize]
-        public IActionResult Edit(int linkId)
+        public IActionResult Edit(int linkId, int categoryId)
         {
             // get link from database using linkId, and include the category
             var link = _context.Links.First(l => l.LinkId == linkId);
 
             // get category from database using categoryId and set ViewBag
-            var category = _context.Categories.Find(link.LinkCategory);
-            ViewBag.Category = category;
+            var category = _context.Categories.Find(categoryId);
+            link.LinkCategory = category;
 
             
             // return view with link
@@ -41,9 +42,9 @@ namespace WebAppProject3.Controllers
         // edit link post request
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("/link/{linkId}/edit")]
+        [Route("/category/{categoryId}/link/{linkId}/edit")]
         [Authorize]
-        public IActionResult EditSubmit(int linkId) 
+        public IActionResult EditSubmit(LinkModel link, int linkId, int categoryId)
         {
             // validate the form
             if (!ModelState.IsValid)
@@ -62,12 +63,19 @@ namespace WebAppProject3.Controllers
                     return View("Edit");
                 }
 
+                // update the fields
+                linkFromDb.LinkLabel = link.LinkLabel;
+                linkFromDb.LinkHref = link.LinkHref;
+                linkFromDb.IsPinned = link.IsPinned;
+                linkFromDb.FaviconSrc = link.FaviconSrc;
+
+
                 // update the link
                 _context.Links.Update(linkFromDb);
                 _context.SaveChanges();
 
                 // redirect to the category page
-                return Redirect($"/category/{linkFromDb.LinkCategory.CategoryId}");
+                return Redirect($"/");
             }
             catch
             {
