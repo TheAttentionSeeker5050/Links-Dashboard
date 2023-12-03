@@ -21,8 +21,11 @@ namespace WebAppProject3.Controllers
         private ApplicationDbContext _context;
 
         // constructor for UserController
-        public UserController(ApplicationDbContext context)
+        private readonly ILogger<UserController> _logger;
+
+        public UserController(ILogger<UserController> logger, ApplicationDbContext context)
         {
+            _logger = logger;
             _context = context;
         }
 

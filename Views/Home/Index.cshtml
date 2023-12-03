@@ -19,7 +19,7 @@
                     @* if is authenticated, display the add and edit buttons *@
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a href="https://google.com/">
+                        <a asp-action="Create" asp-controller="NewLink" asp-route-categoryId="@category.CategoryId">
                             <img src="~/svg/plus-circle.svg" width="20" height="20" />
                         </a>
 

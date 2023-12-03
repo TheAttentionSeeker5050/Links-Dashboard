@@ -14,9 +14,9 @@ namespace WebAppProject3.Controllers
         // will use Entity Framework to access database
         private ApplicationDbContext _context;
 
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<CategoryController> _logger;
 
-        public CategoryController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public CategoryController(ILogger<CategoryController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
