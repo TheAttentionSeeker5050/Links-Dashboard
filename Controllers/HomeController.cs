@@ -43,12 +43,6 @@ namespace WebAppProject3.Controllers
             // using Entity Framework, get all links from database
             var links = _context.Links.ToArray();
 
-            /*if (links == null)
-            {
-                ViewBag.Links = new LinkModel[0].ToArray();
-                return View();
-            }*/
-
             ViewBag.Links = links;
 
             return View();

@@ -1,0 +1,15 @@
+#linksDashboardSection {
+    max-width:900px;
+}
+
+.linkSeparator {
+    border-bottom: 3px dotted #ccc;
+}
+.linkSeparator2 {
+    border-bottom: 3px solid #ccc;
+}
+
+.linkCategory {
+    min-width: 180px;
+}
+

@@ -4,37 +4,94 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">_LaunchPad</h1>
+<div class="">
+    <h1 class="h1 text-center my-5">_LaunchPad</h1>
     @* if the user is on mobile screen, display subsections of linlSection flex col, if not mobile, display flex row *@
-    <section id="linksSection" class="d-flex flex-sm-row flex-column gap-3 mx-auto">
+    <section id="linksDashboardSection" class="d-flex flex-sm-row flex-column justify-content-around gap-5 mx-auto">
         @* for each of the categories in enum, div with title as enum Category *@
 
         @foreach (var category in Enum.GetValues(typeof(Category)))
         {
             <div class="linkCategory">
-                <h2>@category</h2>
+                <div class="d-flex flex-row gap-2 my-1">
+                    <h2 class="h4"> @category </h2>
+
+                    @* if is authenticated, display the add and edit buttons *@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="https://google.com/">
+                            <img src="~/svg/plus-circle.svg" width="20" height="20" />
+
+                        </a>
+
+                        <a href="https://google.com/">
+                            <img src="~/svg/pencil-fill.svg" width="20" height="20" />
+                        </a>
+                    }
+                           
+
+                </div>
+
+                <p class="linkSeparator2 my-3"></p>
+                
                 @* for each of the links in the model, if the link category matches the current category, display the link *@
                 @foreach (var link in ViewBag.Links)
                 {
                     
-
-                    @if (link.LinkCategory.ToString() == category.ToString())
+                    @if (link.LinkCategory.ToString() == category.ToString() && link.IsPinned == true)
                     {
-                        <div class="">
-                            <img src="@link.FaviconSrc" width="25" height="25" />
-                            <a href="@link.LinkHref">@link.LinkName</a>
+                        <div class="d-flex flex-row gap-1 my-2 justify-content-between">
+                            <div>
+                                <img src="@link.FaviconSrc" width="25" height="25" />
+                                <a href="@link.LinkHref">@link.LinkName</a>
+                            </div>
+                            <div>
+                                @* if is authenticated, display the add and edit buttons *@
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a href="https://google.com/">
+                                        <img src="~/svg/pencil-fill.svg" width="20" height="20" />
+                                    </a>
+                                    <a href="https://google.com/">
+                                        <img src="~/svg/trash3-fill.svg" width="20" height="20" />
+                                    </a>
+                                }
+                            </div>
+
                         </div>
                     }
-
                 }
                 
+                <p class="linkSeparator my-3"></p>
+
+                @foreach (var link in ViewBag.Links)
+                {
+                    @if (link.LinkCategory.ToString() == category.ToString() && link.IsPinned == false)
+                    {
+                        <div class="d-flex flex-row gap-1 justify-content-between">
+                            <div>
+                                <img src="@link.FaviconSrc" width="25" height="25" />
+                                <a href="@link.LinkHref">@link.LinkName</a>
+                            </div>
+                            <div>
+                                @* if is authenticated, display the add and edit buttons *@
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a href="https://google.com/">
+                                        <img src="~/svg/pencil-fill.svg" width="20" height="20" />
+                                    </a>
+                                    <a href="https://google.com/">
+                                        <img src="~/svg/trash3-fill.svg" width="20" height="20" />
+                                    </a>
+                                }
+                            </div>
+                            
+                        </div>
+                    }
+                }
+
             </div>
         }
-        @* <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-        <div>Item 4</div> *@
     </section>
     
 </div>
