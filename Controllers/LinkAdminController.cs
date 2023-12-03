@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAppProject3.Data;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace WebAppProject3.Controllers
 {
@@ -18,7 +20,64 @@ namespace WebAppProject3.Controllers
             _context = context;
         }
 
-        // GET: LinkAdminController
+        // edit link get request
+        [HttpGet]
+        [Route("/link/{linkId}/edit")]
+        [Authorize]
+        public IActionResult Edit(int linkId)
+        {
+            // get link from database using linkId, and include the category
+            var link = _context.Links.First(l => l.LinkId == linkId);
+
+            // get category from database using categoryId and set ViewBag
+            var category = _context.Categories.Find(link.LinkCategory);
+            ViewBag.Category = category;
+
+            
+            // return view with link
+            return View(link);
+        }
+
+        // edit link post request
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/link/{linkId}/edit")]
+        [Authorize]
+        public IActionResult EditSubmit(int linkId) 
+        {
+            // validate the form
+            if (!ModelState.IsValid)
+            {
+                return View("Edit");
+            }
+
+            try
+            {
+                   // find the Link model by id
+                var linkFromDb = _context.Links.Find(linkId);
+                if (linkFromDb == null)
+                {
+                    // return error on form
+                    ModelState.AddModelError("Link", "Link not found");
+                    return View("Edit");
+                }
+
+                // update the link
+                _context.Links.Update(linkFromDb);
+                _context.SaveChanges();
+
+                // redirect to the category page
+                return Redirect($"/category/{linkFromDb.LinkCategory.CategoryId}");
+            }
+            catch
+            {
+                // return error on form
+                ModelState.AddModelError("Link", "Could not update link");
+                return View("Edit");
+            }
+        }
+
+        /*// GET: LinkAdminController
         public ActionResult Index()
         {
             return View();
@@ -91,6 +150,6 @@ namespace WebAppProject3.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }

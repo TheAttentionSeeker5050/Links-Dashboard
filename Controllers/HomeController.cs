@@ -52,8 +52,7 @@ namespace WebAppProject3.Controllers
             // order by category name and link label
             links = _context.Links.OrderBy(l => l.LinkCategory.CategoryName).ThenBy(l => l.LinkLabel).ToArray();
 
-            // add an array of categories dictionaries and HasPinnedLinks to ViewBag
-            ViewBag.CategoriesHasPinnedLinks = new List<(string, bool)>();
+            ViewBag.Links = links;
             
             return View(links);
         }
