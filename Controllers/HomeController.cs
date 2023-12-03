@@ -4,21 +4,9 @@ using WebAppProject3.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using WebAppProject3.Data;
-/*using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using System.Security.Claims;
+using System.Linq;
 using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using System.Text;
-using System.IO;
-using System.Net;
-*/
+
 
 
 namespace WebAppProject3.Controllers
@@ -49,9 +37,10 @@ namespace WebAppProject3.Controllers
             // add all distinct link labels to ViewBag
             ViewBag.LinkLabels = _context.Links.Select(l => l.LinkLabel).Distinct().ToArray();
 
-            // order by category name and link label
+            // order by category name and pinned first and link label
             links = _context.Links.OrderBy(l => l.LinkCategory.CategoryName).ThenBy(l => l.LinkLabel).ToArray();
 
+            
             ViewBag.Links = links;
             
             return View(links);

@@ -36,9 +36,20 @@ CREATE TABLE `Links` (
 INSERT INTO `Links` (`LinkId`, `FaviconSrc`, `LinkLabel`, `LinkHref`, `IsPinned`, `LinkCategoryCategoryId`) VALUES
 (1,	'https://google.com/favicon.ico',	'Google',	'https://google.com',	0,	4),
 (2,	'https://chat.openai.com/favicon.ico',	'ChatGPT',	'https://chat.openai.com',	0,	4),
-(3,	'https://www.bing.com/favicon.ico',	'Bing',	'https://www.bing.com',	0,	4),
 (4,	'https://brave.com/static-assets/images/brave-favicon.png',	'Brave',	'https://brave.com',	0,	4),
-(5,	'https://ca.yahoo.com/favicon.ico',	'Yahoo',	'https://ca.yahoo.com/',	0,	4);
+(5,	'https://ca.yahoo.com/favicon.ico',	'Yahoo',	'https://ca.yahoo.com/',	0,	4),
+(8,	'https://www.bing.com/favicon.ico',	'Bing',	'https://learn.microsoft.com',	0,	4),
+(9,	'https://store.steampowered.com/favicon.ico',	'Steam',	'https://store.steampowered.com/',	0,	3),
+(10,	'https://us.shop.battle.net/static/favicon-32x32.png',	'Battlenet',	'https://us.shop.battle.net/',	0,	3),
+(11,	'https://www.twitch.tv/favicon.ico',	'Twitch',	'https://www.twitch.tv',	0,	3),
+(12,	'https://youtube.com/favicon.ico',	'Youtube',	'https://youtube.com/',	0,	3),
+(13,	' https://s.brightspace.com/lib/branding/1.0.0/brightspace/favicon.ico',	'Brightspace',	'https://nscconline.brightspace.com',	0,	2),
+(14,	'https://www.udemy.com/staticx/udemy/images/v8/favicon-32x32.png',	'Udemy',	'https://www.udemy.com/',	0,	2),
+(15,	'https://d3njjcbhbojbot.cloudfront.net/web/images/favicons/favicon-v2-32x32.png',	'Coursera',	'https://www.coursera.org',	0,	2),
+(16,	'https://nextjs.org/favicon.ico',	'Next.js',	'https://nextjs.org',	0,	1),
+(17,	'https://www.docker.com/favicon.ico',	'Docker',	'https://www.docker.com',	1,	1),
+(18,	'https://learn.microsoft.com/favicon.ico',	'Microsoft Docs',	'https://learn.microsoft.com',	0,	1),
+(19,	'https://stackoverflow.com/favicon.ico',	'Stack Overflow',	'https://stackoverflow.com/',	0,	1);
 
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (
@@ -73,4 +84,4 @@ INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`) VALUES
 ('20231203015912_Mig7',	'6.0.0'),
 ('20231203020201_Mig8',	'6.0.0');
 
--- 2023-12-03 02:44:19
+-- 2023-12-03 16:59:10

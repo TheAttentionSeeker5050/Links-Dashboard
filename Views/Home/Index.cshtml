@@ -8,8 +8,8 @@
     <h1 class="h1 text-center my-5">_LaunchPad</h1>
     @* if the user is on mobile screen, display subsections of linlSection flex col, if not mobile, display flex row *@
     <section id="linksDashboardSection" class="d-flex flex-sm-row flex-column justify-content-around gap-5 mx-auto">
-        @* for each of the categories in enum, div with title as enum Category *@
 
+        @* for each of the categories, div with title CategoryName *@
         @foreach (var category in @ViewBag.Categories)
         {
             <div class="linkCategory">
