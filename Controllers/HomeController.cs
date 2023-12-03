@@ -45,11 +45,17 @@ namespace WebAppProject3.Controllers
 
             // add all the categories to ViewBag
             ViewBag.Categories = _context.Categories.ToArray();
-            
 
+            // add all distinct link labels to ViewBag
+            ViewBag.LinkLabels = _context.Links.Select(l => l.LinkLabel).Distinct().ToArray();
+
+            // order by label
+            links = _context.Links.OrderBy(l => l.LinkLabel).ToArray();
             ViewBag.Links = links;
 
-            return View();
+
+
+            return View(links);
         }
 
         

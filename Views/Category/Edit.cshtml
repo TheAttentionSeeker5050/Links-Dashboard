@@ -1,0 +1,26 @@
+﻿@model WebAppProject3.Models.CategoryModel
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<div class="">
+    <h1 class="h1 text-center my-4">_LaunchPad</h1>
+    <h2 class="h2 text-center my-4">Edit Category</h2>
+
+    @* make a form that posts to the controller to edit category *@
+    <form method="POST" class="flex-column d-flex gap-4 mx-auto my-5" id="formSection">
+        @* the fields are: CategoryName, hidden CategoryId *@
+        <div class="form-group">
+            <label for="CategoryName">Category Name</label>
+            <input type="text" class="form-control" id="CategoryName" name="CategoryName" value="@Model.CategoryName" />
+        </div>
+
+        <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+
+   
+        <button type="submit" class="btn btn-primary" asp-action="EditSubmit" asp-controller="Category">Submit</button>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-danger">Cancel</a>
+    </form>
+
+</div>
