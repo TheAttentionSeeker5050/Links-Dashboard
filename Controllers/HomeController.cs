@@ -49,12 +49,12 @@ namespace WebAppProject3.Controllers
             // add all distinct link labels to ViewBag
             ViewBag.LinkLabels = _context.Links.Select(l => l.LinkLabel).Distinct().ToArray();
 
-            // order by label
-            links = _context.Links.OrderBy(l => l.LinkLabel).ToArray();
-            ViewBag.Links = links;
+            // order by category name and link label
+            links = _context.Links.OrderBy(l => l.LinkCategory.CategoryName).ThenBy(l => l.LinkLabel).ToArray();
 
-
-
+            // add an array of categories dictionaries and HasPinnedLinks to ViewBag
+            ViewBag.CategoriesHasPinnedLinks = new List<(string, bool)>();
+            
             return View(links);
         }
 

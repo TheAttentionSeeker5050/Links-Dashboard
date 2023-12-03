@@ -25,7 +25,6 @@ CREATE TABLE `Links` (
   `LinkId` int NOT NULL AUTO_INCREMENT,
   `FaviconSrc` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `LinkLabel` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `LinkName` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `LinkHref` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `IsPinned` tinyint(1) NOT NULL DEFAULT '0',
   `LinkCategoryCategoryId` int NOT NULL DEFAULT '0',
@@ -34,12 +33,12 @@ CREATE TABLE `Links` (
   CONSTRAINT `FK_Links_Categories_LinkCategoryCategoryId` FOREIGN KEY (`LinkCategoryCategoryId`) REFERENCES `Categories` (`CategoryId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `Links` (`LinkId`, `FaviconSrc`, `LinkLabel`, `LinkName`, `LinkHref`, `IsPinned`, `LinkCategoryCategoryId`) VALUES
-(1,	'https://google.com/favicon.ico',	'Finders',	'Google',	'https://google.com',	0,	4),
-(2,	'https://chat.openai.com/favicon.ico',	'AI Chatbots',	'ChatGPT',	'https://chat.openai.com',	0,	4),
-(3,	'https://www.bing.com/favicon.ico',	'Shitty Finders',	'Bing',	'https://www.bing.com',	0,	4),
-(4,	'https://brave.com/static-assets/images/brave-favicon.png',	'Awesome Finders',	'Brave',	'https://brave.com',	0,	4),
-(5,	'https://ca.yahoo.com/favicon.ico',	'Finders',	'Yahoo',	'https://ca.yahoo.com/',	0,	4);
+INSERT INTO `Links` (`LinkId`, `FaviconSrc`, `LinkLabel`, `LinkHref`, `IsPinned`, `LinkCategoryCategoryId`) VALUES
+(1,	'https://google.com/favicon.ico',	'Google',	'https://google.com',	0,	4),
+(2,	'https://chat.openai.com/favicon.ico',	'ChatGPT',	'https://chat.openai.com',	0,	4),
+(3,	'https://www.bing.com/favicon.ico',	'Bing',	'https://www.bing.com',	0,	4),
+(4,	'https://brave.com/static-assets/images/brave-favicon.png',	'Brave',	'https://brave.com',	0,	4),
+(5,	'https://ca.yahoo.com/favicon.ico',	'Yahoo',	'https://ca.yahoo.com/',	0,	4);
 
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (

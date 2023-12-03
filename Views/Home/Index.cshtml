@@ -38,32 +38,53 @@
                 @* for each of the links in the model, if the link category matches the current category, display the link 
                     iterate using object item and index
                 *@
-                @foreach (var index in Enumerable.Range(0, ViewBag.Links.Length))
-                {
-                    
-                    @if (ViewBag.Links[index].LinkCategory.CategoryName.ToString() == category.CategoryName.ToString() && ViewBag.Links[index].IsPinned == true)
+                @* check if category has pinned links using viewbag CategoriesHasPinnedLinks *@
+                @* @if (ViewBag.CategoriesHasPinnedLinks[category.CategoryId] == true)
+                { *@
+                    @foreach (var index in Enumerable.Range(0, ViewBag.Links.Length))
                     {
 
-                        <div class="d-flex flex-row gap-1 ">
-                            @* if is authenticated, display the add and edit buttons *@
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <a href="https://google.com/">
-                                    <img src="~/svg/pencil-fill.svg" width="20" height="20" />
-                                </a>
-                                <a href="https://google.com/">
-                                    <img src="~/svg/trash3-fill.svg" width="20" height="20" />
-                                </a>
-                            }
+                        @if (ViewBag.Links[index].LinkCategory.CategoryName.ToString() == category.CategoryName.ToString() && ViewBag.Links[index].IsPinned == true)
+                        {
 
-                            <img src="@ViewBag.Links[index].FaviconSrc" width="25" height="25" />
-                            <a href="@ViewBag.Links[index].LinkHref">@ViewBag.Links[index].LinkLabel</a>
+                            <div class="d-flex flex-row gap-1 ">
+                                @* if is authenticated, display the add and edit buttons *@
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a href="https://google.com/">
+                                        <img src="~/svg/pencil-fill.svg" width="20" height="20" />
+                                    </a>
+                                    <a href="https://google.com/">
+                                        <img src="~/svg/trash3-fill.svg" width="20" height="20" />
+                                    </a>
+                                }
 
-                        </div>
+                                <img src="@ViewBag.Links[index].FaviconSrc" width="25" height="25" />
+                                <a href="@ViewBag.Links[index].LinkHref">@ViewBag.Links[index].LinkLabel</a>
+
+                            </div>
+                        }
+                    }
+                    
+                 @*    <p class="linkSeparator2 my-3"></p>
+                } *@
+
+                @* only display the separator if there are pinned links in this category *@
+                @foreach (var link in ViewBag.Links)
+                {
+                    // for each of the link elements, we will find distinct categories and add them to the ViewBag if they have pinned links, break the loop if we find a category with pinned links
+                    
+
+                    @if (link.LinkCategory.CategoryName == category.CategoryName && link.IsPinned == true)
+                    {
+                        <p class="linkSeparator my-3"></p>
+                        break;
                     }
                 }
                 
-                <p class="linkSeparator my-3"></p>
+                
+                
+                
 
                 @foreach (var index in Enumerable.Range(0, ViewBag.Links.Length))
                 {
