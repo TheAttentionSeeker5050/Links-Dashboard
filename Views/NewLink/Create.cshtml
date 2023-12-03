@@ -9,9 +9,40 @@
     <h2 class="h2 text-center my-4">Edit Category</h2>
 
     @* make a form that posts to the controller to create link *@
-    <form method="post" class="flex-column d-flex gap-4 mx-auto my-5" id="formSection" asp-action="CreateSubmit" asp-controller="Link">
+    <form method="post" class="flex-column d-flex gap-4 mx-auto my-5" id="formSection" asp-action="CreateSubmit" asp-controller="NewLink" asp-route-categoryId="@Model.LinkCategory.CategoryId">
+        <p>Enter the data below</p>
 
-        @* the fields are: LinkName, LinkHref, LinkLabel, LinkCategory, IsPinned, hidden LinkId *@
+        @* the fields are: FaviconSrc, LinkLabel, LinkHref, LinkName, IsPinned, greyed out LinkCategory *@
+
+        @* greyed out LinkCategory *@
+        <div class="d-flex flex-row gap-3">
+            <label for="LinkCategory">Link Category</label>
+            <input type="text" name="LinkCategory" id="LinkCategory" class="form-control" value="@Model.LinkCategory.CategoryName" disabled />
+            <span asp-validation-for="LinkCategory"></span>
+        </div>
+
+
+        <div class="d-flex flex-row gap-3">
+            <label for="FaviconSrc">Favicon Source</label>
+            <input type="text" name="FaviconSrc" id="FaviconSrc" class="form-control" value="@Model.FaviconSrc" />
+        </div>
+
+        <div class="d-flex flex-row gap-3">
+            <label for="LinkLabel">Link Label</label>
+            <input type="text" name="LinkLabel" id="LinkLabel" class="form-control" value="@Model.LinkLabel" />
+        </div>
+
+        <div class="d-flex flex-row gap-3">
+            <label for="LinkHref">Link Href</label>
+            <input type="text" name="LinkHref" id="LinkHref" class="form-control" value="@Model.LinkHref" />
+        </div>
+
+        <div class="d-flex flex-row gap-3">
+            <label for="IsPinned">Is Pinned</label>
+            <input type="checkbox" name="IsPinned" id="IsPinned" class="" value="@Model.IsPinned" />
+        </div>
+
+
         <div class="d-flex flex-row mx-auto gap-3">
             <button type="submit" class="btn btn-primary">Submit</button>
             <a asp-action="Index" asp-controller="Home" class="btn btn-danger">Cancel</a>

@@ -17,7 +17,7 @@ namespace WebAppProject3.Models
         public int LinkId { get; set; } = 0;
         public string FaviconSrc { get; set; } = "";
         public string LinkLabel { get; set; } = "";
-        public string LinkHref{ get; set; } = "";
+        public string LinkHref { get; set; } = "";
         public string LinkName { get; set; } = "";
         public bool IsPinned { get; set; } = false;
         public CategoryModel LinkCategory { get; set; } = new CategoryModel();

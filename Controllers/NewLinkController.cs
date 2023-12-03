@@ -29,7 +29,16 @@ namespace WebAppProject3.Controllers
         [Authorize]
         public IActionResult Create(int categoryId)
         {
-            return View();
+            // initialize the model
+            var link = new LinkModel();
+
+            // get category from database using categoryId
+            var category = _context.Categories.Find(categoryId);
+
+            // set the category of the link
+            link.LinkCategory = category;
+
+            return View(link);
         }
 
         // POST: LinkController/Create
@@ -42,6 +51,15 @@ namespace WebAppProject3.Controllers
             // validate the form
             if (!ModelState.IsValid)
             {
+                return View("Create");
+            }
+
+            // add the category to the link
+            link.LinkCategory = _context.Categories.Find(categoryId);
+            if (link.LinkCategory == null)
+            {
+                // add error message to ModelState
+                ModelState.AddModelError("LinkCategory", "Invalid category");
                 return View("Create");
             }
 

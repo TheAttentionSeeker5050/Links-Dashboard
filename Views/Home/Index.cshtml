@@ -43,36 +43,21 @@
                     
                     @if (ViewBag.Links[index].LinkCategory.CategoryName.ToString() == category.CategoryName.ToString() && ViewBag.Links[index].IsPinned == true)
                     {
-                        @* if the item above has a different label, display the label *@
-                        @if (index > 0 && ViewBag.Links[index].LinkLabel != ViewBag.Links[index - 1].LinkLabel)
-                        {
-                            <p class="linkSeparator2 h6 my-3"></p>
-                            <p class="linkLabel h6">@ViewBag.Links[index].LinkLabel</p>
-                        }
-                        else if (index == 0)
-                        {
-                            <p class="linkLabel h6">@ViewBag.Links[index].LinkLabel</p>
-                        }
 
-                        <div class="d-flex flex-row gap-1 justify-content-between">
-                            <div>
-                                <img src="@ViewBag.Links[index].FaviconSrc" width="25" height="25" />
-                                <a href="@ViewBag.Links[index].LinkHref">@ViewBag.Links[index].LinkName</a>
+                        <div class="d-flex flex-row gap-1 ">
+                            @* if is authenticated, display the add and edit buttons *@
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a href="https://google.com/">
+                                    <img src="~/svg/pencil-fill.svg" width="20" height="20" />
+                                </a>
+                                <a href="https://google.com/">
+                                    <img src="~/svg/trash3-fill.svg" width="20" height="20" />
+                                </a>
+                            }
 
-
-                            </div>
-                            <div>
-                                @* if is authenticated, display the add and edit buttons *@
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <a href="https://google.com/">
-                                        <img src="~/svg/pencil-fill.svg" width="20" height="20" />
-                                    </a>
-                                    <a href="https://google.com/">
-                                        <img src="~/svg/trash3-fill.svg" width="20" height="20" />
-                                    </a>
-                                }
-                            </div>
+                            <img src="@ViewBag.Links[index].FaviconSrc" width="25" height="25" />
+                            <a href="@ViewBag.Links[index].LinkHref">@ViewBag.Links[index].LinkLabel</a>
 
                         </div>
                     }
@@ -84,35 +69,20 @@
                 {
                     @if (ViewBag.Links[index].LinkCategory.CategoryName.ToString() == category.CategoryName.ToString() && ViewBag.Links[index].IsPinned == false)
                     {
-                        @* if the item above has a different label, display the label *@
-                        @if (index > 0 && ViewBag.Links[index].LinkLabel != ViewBag.Links[index - 1].LinkLabel)
-                        {
-                            <p class="linkSeparator my-3"></p>
-                            <p class="linkLabel h6">@ViewBag.Links[index].LinkLabel</p>
-                        } else if (index == 0)
-                        {
-                            <p class="linkLabel h6">@ViewBag.Links[index].LinkLabel</p>
-                        }
+                        <div class="d-flex flex-row gap-1 ">
+                            @* if is authenticated, display the add and edit buttons *@
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a href="https://google.com/">
+                                    <img src="~/svg/pencil-fill.svg" width="20" height="20" />
+                                </a>
+                                <a href="https://google.com/">
+                                    <img src="~/svg/trash3-fill.svg" width="20" height="20" />
+                                </a>
+                            }
 
-                        <div class="d-flex flex-row gap-1 justify-content-between">
-                            <div>
-                                <img src="@ViewBag.Links[index].FaviconSrc" width="25" height="25" />
-                                <a href="@ViewBag.Links[index].LinkHref">@ViewBag.Links[index].LinkName</a>
-                                
-
-                            </div>
-                            <div>
-                                @* if is authenticated, display the add and edit buttons *@
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <a href="https://google.com/">
-                                        <img src="~/svg/pencil-fill.svg" width="20" height="20" />
-                                    </a>
-                                    <a href="https://google.com/">
-                                        <img src="~/svg/trash3-fill.svg" width="20" height="20" />
-                                    </a>
-                                }
-                            </div>
+                            <img src="@ViewBag.Links[index].FaviconSrc" width="25" height="25" />
+                            <a href="@ViewBag.Links[index].LinkHref">@ViewBag.Links[index].LinkLabel</a>
                             
                         </div>
                     }
