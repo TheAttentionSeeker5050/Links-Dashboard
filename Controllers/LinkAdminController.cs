@@ -85,6 +85,55 @@ namespace WebAppProject3.Controllers
             }
         }
 
+        // delete link get request
+        [HttpGet]
+        [Route("/category/{categoryId}/link/{linkId}/delete")]
+        [Authorize]
+        public IActionResult Delete(int linkId, int categoryId)
+        {
+            // get link from database using linkId, and include the category
+            var link = _context.Links.First(l => l.LinkId == linkId);
+
+            // no need to get category from database, we won't use it anyway
+
+            // return view with link
+            return View(link);
+        }
+
+        // delete link post request
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/category/{categoryId}/link/{linkId}/delete")]
+        [Authorize]
+        public IActionResult DeleteSubmit(int linkId)
+        {
+            try
+            {
+                // find the Link model by id
+                var linkFromDb = _context.Links.Find(linkId);
+                if (linkFromDb == null)
+                {
+                    // return error on form
+                    ModelState.AddModelError("Link", "Link not found");
+                    return View("Delete");
+                }
+
+                // delete the link
+                _context.Links.Remove(linkFromDb);
+                _context.SaveChanges();
+
+                // redirect to the category page
+                return Redirect($"/");
+            }
+            catch
+            {
+                // return error on form
+                ModelState.AddModelError("Link", "Could not delete link");
+                return View("Delete");
+            }
+        }
+
+
         /*// GET: LinkAdminController
         public ActionResult Index()
         {

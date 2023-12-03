@@ -51,7 +51,7 @@
                                 <a asp-controller="LinkAdmin" asp-action="Edit" asp-route-linkId="@ViewBag.Links[index].LinkId" asp-route-categoryId="@category.CategoryId">
                                     <img src="~/svg/pencil-fill.svg" width="20" height="20" />
                                 </a>
-                                <a href="https://google.com/">
+                                <a asp-controller="LinkAdmin" asp-action="Delete" asp-route-linkId="@ViewBag.Links[index].LinkId" asp-route-categoryId="@category.CategoryId">
                                     <img src="~/svg/trash3-fill.svg" width="20" height="20" />
                                 </a>
                             }
@@ -87,7 +87,7 @@
                                 <a asp-controller="LinkAdmin" asp-action="Edit" asp-route-linkId="@ViewBag.Links[index].LinkId" asp-route-categoryId="@category.CategoryId">
                                     <img src="~/svg/pencil-fill.svg" width="20" height="20" />
                                 </a>
-                                <a href="https://google.com/">
+                                <a asp-controller="LinkAdmin" asp-action="Delete" asp-route-linkId="@ViewBag.Links[index].LinkId" asp-route-categoryId="@category.CategoryId">
                                     <img src="~/svg/trash3-fill.svg" width="20" height="20" />
                                 </a>
                             }
