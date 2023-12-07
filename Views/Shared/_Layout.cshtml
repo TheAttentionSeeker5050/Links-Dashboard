@@ -28,8 +28,8 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <form asp-action="Logout" asp-controller="User" method="POST">
-                                    <button type="submit" class="nav-link text-dark" >Logout</button>
+                                <form asp-action="Logout" asp-controller="User" method="POST" id="logout-form">
+                                    <button type="submit" class="nav-link text-dark"  id="logout-form-btn">Logout</button>
                                 </form>
                             </li>
                         } else
@@ -48,6 +48,13 @@
     </header>
     <div class="container">
         <main role="main" class="">
+            @* make an alert for logout warning *@
+            @if (User.Identity.IsAuthenticated) {
+                <p hidden id="user-is-authenticated">true</p>
+                <p id="session-logout-warning" class="text-danger"></p>
+            } else {
+                <p hidden id="user-is-authenticated">false</p>
+            }
             @RenderBody()
         </main>
     </div>

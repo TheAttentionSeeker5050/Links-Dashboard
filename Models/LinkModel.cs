@@ -19,7 +19,7 @@ namespace WebAppProject3.Models
         public string LinkLabel { get; set; } = "";
         public string LinkHref { get; set; } = "";
         public bool IsPinned { get; set; } = false;
-
+        public int LinkCategoryCategoryId { get; set; } = 0;
         public CategoryModel LinkCategory { get; set; } = new CategoryModel();
     }
 

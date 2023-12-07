@@ -34,7 +34,9 @@ namespace WebAppProject3.Controllers
             var category = _context.Categories.Find(categoryId);
             link.LinkCategory = category;
 
-            
+            // add a viewbag for all the category list
+            ViewBag.Categories = _context.Categories.ToArray();
+
             // return view with link
             return View(link);
         }
@@ -63,11 +65,16 @@ namespace WebAppProject3.Controllers
                     return View("Edit");
                 }
 
+                Console.WriteLine("Category on post form: "+ link.LinkCategory.CategoryId);
+
                 // update the fields
                 linkFromDb.LinkLabel = link.LinkLabel;
+                linkFromDb.LinkCategoryCategoryId = link.LinkCategoryCategoryId; // Setting the foreign key
                 linkFromDb.LinkHref = link.LinkHref;
                 linkFromDb.IsPinned = link.IsPinned;
                 linkFromDb.FaviconSrc = link.FaviconSrc;
+
+                // Console.WriteLine("Category: "+ linkFromDb.LinkCategory?.CategoryId + " " + linkFromDb.LinkCategory?.CategoryName);
 
 
                 // update the link

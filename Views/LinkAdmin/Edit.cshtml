@@ -16,7 +16,16 @@
         @* greyed out LinkCategory *@
         <div class="d-flex flex-row gap-3">
             <label for="LinkCategory">Link Category</label>
-            <input type="text" name="LinkCategory" id="LinkCategory" class="form-control" value="@Model.LinkCategory.CategoryName" disabled />
+            @* <input type="text" name="LinkCategory" id="LinkCategory" class="form-control" value="@Model.LinkCategory.CategoryName" disabled /> *@
+            @* make a select for the categories *@
+            <select class="form-control" asp-for="LinkCategoryCategoryId">
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.CategoryId">
+                        @category.CategoryName
+                    </option>
+                }
+            </select>
             <span asp-validation-for="LinkCategory"></span>
         </div>
 

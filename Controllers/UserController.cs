@@ -82,8 +82,6 @@ namespace WebAppProject3.Controllers
                     return View("Register", user);
                 }
 
-                Console.WriteLine("Password is valid");
-
                 // hash and salt password
                 user.HashAndSaltPassword(user.Password);
 
@@ -181,6 +179,18 @@ namespace WebAppProject3.Controllers
             // Redirect to the home page or another page after logout
             return RedirectToAction("Index", "Home");
         }
+
+        // // logout get controller
+        // [HttpGet]
+        // [Route("/logout")]
+        // [ValidateAntiForgeryToken]
+        // public IActionResult LogoutGet()
+        // {
+        //     // await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        //     // Redirect to the home page or another page after logout
+        //     return RedirectToAction("Logout", "User");
+        // }
 
 
         // a simple access denied action
