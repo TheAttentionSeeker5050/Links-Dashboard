@@ -19,16 +19,22 @@ builder.Services.AddControllersWithViews();
 // Add Entity Framework Core
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    var configuration = builder.Configuration.GetConnectionString("DefaultConnection");
     
     // If server is development use use DefaultConnection string
     // else use the connection string called ProductionConnectionString
-    if (!builder.Environment.IsDevelopment())
+    if (builder.Environment.IsDevelopment() == false)
     {
-        configuration = builder.Configuration.GetConnectionString("ProductionConnectionString");
+        Console.WriteLine("Production environment detected");
+        var configuration = builder.Configuration.GetConnectionString("ProductionConnectionString");
+        Console.WriteLine("Production connection string: " + configuration);
+        options.UseMySql(configuration, ServerVersion.AutoDetect(configuration));
+    } else {
+        Console.WriteLine("Development environment detected");
+        var configuration = builder.Configuration.GetConnectionString("DefaultConnection");
+        Console.WriteLine("Development connection string: " + configuration);
+        options.UseMySql(configuration, ServerVersion.AutoDetect(configuration));
     }
     
-    options.UseMySql(configuration, ServerVersion.AutoDetect(configuration));
 });
 
 // Add authentication services
@@ -41,22 +47,22 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
 
-// // set up forwarding headers to allow proxy redirection
-// builder.Services.Configure<ForwardedHeadersOptions>(options =>
-// {
-//     options.KnownProxies.Add(IPAddress.Parse("64.225.57.224"));
-// });
+// set up forwarding headers to allow proxy redirection
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.KnownProxies.Add(IPAddress.Parse("64.225.57.224"));
+});
 
 // add session support
 builder.Services.AddSession();
 
 var app = builder.Build();
 
-// // set headers to allow proxy redirection 
-// app.UseForwardedHeaders(new ForwardedHeadersOptions
-// {
-//     ForwardedHeaders = ForwardedHeaders.XForwardedFor |  ForwardedHeaders.XForwardedProto
-// });
+// set headers to allow proxy redirection 
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor |  ForwardedHeaders.XForwardedProto
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -78,8 +84,8 @@ app.UseSession();
 app.UseAuthentication(); // Use authentication middleware
 app.UseAuthorization(); // Use authorization middleware
 
-// // map server ip address to allow proxy redirection
-// app.MapGet("/", () => "64.225.57.224");
+// map server ip address to allow proxy redirection
+app.MapGet("/", () => "64.225.57.224");
 
 app.MapControllerRoute(
     name: "default",
