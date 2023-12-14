@@ -52,11 +52,11 @@ builder.Services.AddSession();
 
 var app = builder.Build();
 
-// // set headers to allow proxy redirection 
-// app.UseForwardedHeaders(new ForwardedHeadersOptions
-// {
-//     ForwardedHeaders = ForwardedHeaders.XForwardedFor |  ForwardedHeaders.XForwardedProto
-// });
+// set headers to allow proxy redirection 
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
