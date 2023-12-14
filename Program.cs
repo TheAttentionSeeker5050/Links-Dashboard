@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/access-denied"; // Customize the access denied path
     });
 
+// set up forwarding headers to allow proxy redirection
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.KnownProxies.Add(IPAddress.Parse("64.225.57.224"));
+});
+
 // add session support
 builder.Services.AddSession();
 
@@ -55,10 +62,10 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios.
     app.UseHsts();
-    app.UseHttpsRedirection();
+/* app.UseHttpsRedirection();*/
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -68,6 +75,9 @@ app.UseSession();
 
 app.UseAuthentication(); // Use authentication middleware
 app.UseAuthorization(); // Use authorization middleware
+
+// map server ip address to allow proxy redirection
+app.MapGet("/", () => "64.225.57.224");
 
 app.MapControllerRoute(
     name: "default",
