@@ -35,8 +35,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/login"; // Customize the login path
-        options.AccessDeniedPath = "/access-denied"; // Customize the access denied path
+        options.LoginPath = "/login"; // The login view path
+        options.AccessDeniedPath = "/access-denied"; // The access denied view path
+        // Set session timeout to 20 minutes
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
 
 // set up forwarding headers to allow proxy redirection

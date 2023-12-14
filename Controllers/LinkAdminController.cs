@@ -34,7 +34,9 @@ namespace WebAppProject3.Controllers
             var category = _context.Categories.Find(categoryId);
             link.LinkCategory = category;
 
-            
+            // add a viewbag for all the category list
+            ViewBag.Categories = _context.Categories.ToArray();
+
             // return view with link
             return View(link);
         }
@@ -63,11 +65,16 @@ namespace WebAppProject3.Controllers
                     return View("Edit");
                 }
 
+                Console.WriteLine("Category on post form: "+ link.LinkCategory.CategoryId);
+
                 // update the fields
                 linkFromDb.LinkLabel = link.LinkLabel;
+                linkFromDb.LinkCategoryCategoryId = link.LinkCategoryCategoryId; // Setting the foreign key
                 linkFromDb.LinkHref = link.LinkHref;
                 linkFromDb.IsPinned = link.IsPinned;
                 linkFromDb.FaviconSrc = link.FaviconSrc;
+
+                // Console.WriteLine("Category: "+ linkFromDb.LinkCategory?.CategoryId + " " + linkFromDb.LinkCategory?.CategoryName);
 
 
                 // update the link
@@ -133,80 +140,5 @@ namespace WebAppProject3.Controllers
             }
         }
 
-
-        /*// GET: LinkAdminController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: LinkAdminController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: LinkAdminController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: LinkAdminController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: LinkAdminController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: LinkAdminController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: LinkAdminController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: LinkAdminController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
     }
 }

@@ -25,6 +25,7 @@ a {
 
 .border-top {
   border-top: 1px solid #e5e5e5;
+  margin: 10px 0;
 }
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;
@@ -39,10 +40,12 @@ button.accept-policy {
   line-height: inherit;
 }
 
+
 .footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   line-height: 60px;
 }
+

@@ -63,7 +63,7 @@ CREATE TABLE `Users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `Users` (`UserId`, `Username`, `PasswordHash`, `PasswordSalt`, `Password`, `PasswordConfirmation`) VALUES
-(1,	'user1',	'fJHP/11IQtB2Thr+EcRMHc/nVlNCVzkASHiV/cmci/E=',	'66294dc0-dc0d-4231-87ca-8c81dd142d10',	'',	'');
+(1,	'user1',	'jOYR/pnD6l78ftxfvsouS+uorzP5+V46k66arHfr+90=',	'44bd71f6-87ab-4b8a-b489-fd8de6e0091b',	'',	''); -- password is: User123**
 
 DROP TABLE IF EXISTS `__EFMigrationsHistory`;
 CREATE TABLE `__EFMigrationsHistory` (
