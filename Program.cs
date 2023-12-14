@@ -18,6 +18,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     var configuration = builder.Configuration.GetConnectionString("DefaultConnection");
+    
+    // If server is development use use DefaultConnection string
+    // else use the connection string called ProductionConnectionString
+    if (!builder.Environment.IsDevelopment())
+    {
+        configuration = builder.Configuration.GetConnectionString("ProductionConnectionString");
+    }
+    
     options.UseMySql(configuration, ServerVersion.AutoDetect(configuration));
 });
 
