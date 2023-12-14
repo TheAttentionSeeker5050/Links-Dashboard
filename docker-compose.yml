@@ -28,19 +28,19 @@ services:
     networks:
       - app-network
 
-  dotnet:
-    build:
-      context: ./
-      dockerfile: dotnet.Dockerfile
-    image: dotnet-server
-    container_name: my-dotnet-server
-    restart: always
-    ports:
-      - 5000:80
-    volumes:
-      - web-root:/app
-    networks:
-      - app-network
+#  dotnet:
+#    build:
+#      context: ./
+#      dockerfile: dotnet.Dockerfile
+#    image: dotnet-server
+#    container_name: my-dotnet-server
+#    restart: always
+#    ports:
+#      - 5000:80
+#    volumes:
+#      - web-root:/app
+#    networks:
+#      - app-network
 
 
 networks:
@@ -49,5 +49,5 @@ networks:
 
 volumes:
     data-volume:
-    web-root:
-      driver: local
+#    web-root:
+#      driver: local
