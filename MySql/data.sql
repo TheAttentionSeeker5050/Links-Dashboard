@@ -7,6 +7,8 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
+USE `links_app_db`;
+
 DROP TABLE IF EXISTS `Categories`;
 CREATE TABLE `Categories` (
   `CategoryId` int NOT NULL AUTO_INCREMENT,
