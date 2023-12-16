@@ -47,11 +47,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
 
-// set up forwarding headers to allow proxy redirection
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.KnownProxies.Add(IPAddress.Parse("64.225.57.224"));
-});
+// // set up forwarding headers to allow proxy redirection
+// builder.Services.Configure<ForwardedHeadersOptions>(options =>
+// {
+//     options.KnownProxies.Add(IPAddress.Parse("64.225.57.224"));
+// });
 
 // add session support
 builder.Services.AddSession();
@@ -85,7 +85,7 @@ app.UseAuthentication(); // Use authentication middleware
 app.UseAuthorization(); // Use authorization middleware
 
 // map server ip address to allow proxy redirection
-app.MapGet("/", () => "64.225.57.224");
+// app.MapGet("/", () => "64.225.57.224");
 
 app.MapControllerRoute(
     name: "default",

@@ -19,14 +19,14 @@ services:
     networks:
       - app-network
 
-  adminer:
-    image: adminer
-    container_name: my-adminer
-    restart: always
-    ports:
-      - 8080:8080
-    networks:
-      - app-network
+  # adminer:
+  #   image: adminer
+  #   container_name: my-adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+  #   networks:
+  #     - app-network
 
 #  dotnet:
 #    build:
