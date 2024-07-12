@@ -21,7 +21,8 @@ This follows a .NET standard MVC Pattern
 - make sure that you have the following environment variables
 
 
-`MYSQL_ROOT_PASSWORD=
+```
+MYSQL_ROOT_PASSWORD=
 
 MYSQL_DATABASE=
 
@@ -35,7 +36,8 @@ MYSQL_PORT=
 
 DB_CONNECTION_STRING=
 
-DB_CONNECTION_STRING_PROD=`
+DB_CONNECTION_STRING_PROD=
+```
 
 
 
