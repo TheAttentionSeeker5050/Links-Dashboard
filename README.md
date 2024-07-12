@@ -20,24 +20,16 @@ This follows a .NET standard MVC Pattern
 - Modify and run the docker compose using docker
 - make sure that you have the following environment variables
 
-`
+
 MYSQL_ROOT_PASSWORD=
-
 MYSQL_DATABASE=
-
 MYSQL_USER=
-
 MYSQL_PASSWORD=
-
 MYSQL_HOST=
-
 MYSQL_PORT= 
-
 DB_CONNECTION_STRING=
-
 DB_CONNECTION_STRING_PROD=
 
-`
 
 
 Please check the demo of this app running: https://links-dashboard.nicolas-castellano.com/
